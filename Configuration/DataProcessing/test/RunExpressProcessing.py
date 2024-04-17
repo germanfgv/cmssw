@@ -14,7 +14,7 @@ import traceback
 import pickle
 
 from Configuration.DataProcessing.GetScenario import getScenario
-
+import FWCore.ParameterSet.Types as CfgTypes
 
 
 class RunExpressProcessing:
@@ -191,6 +191,6 @@ python RunExpressProcessing.py --scenario pp --global-tag GLOBALTAG --lfn /store
         if opt == "--alcarecos":
             expressinator.alcaRecos = [ x for x in arg.split('+') if len(x) > 0 ]
         if opt == "--nThreads":
-            expressinator.nThreads = arg
+            expressinator.nThreads = CfgTypes.untracked(CfgTypes.uint32(arg))
 
     expressinator()
