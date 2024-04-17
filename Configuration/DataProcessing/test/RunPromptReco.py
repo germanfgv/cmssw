@@ -12,6 +12,7 @@ import traceback
 import pickle
 
 from Configuration.DataProcessing.GetScenario import getScenario
+import FWCore.ParameterSet.Types as CfgTypes
 
 
 class RunPromptReco:
@@ -206,7 +207,7 @@ python RunPromptReco.py --scenario=ppEra_Run2_2016 --reco --aod --miniaod --nano
         if opt == "--no-output":
             recoinator.noOutput = True
         if opt == "--nThreads":
-            recoinator.nThreads = arg
+            recoinator.nThreads = CfgTypes.untracked(CfgTypes.uint32(arg))
         if opt == "--global-tag":
             recoinator.globalTag = arg
         if opt == "--lfn" :
