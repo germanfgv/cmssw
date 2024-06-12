@@ -94,7 +94,12 @@ def customisePostEra_Run3_2023(process):
     #start with a repeat of Run3
     customisePostEra_Run3(process)
     return process
-
+def customisePostEra_Run3_2023_Muon(process):
+    #start with a repeat of Run3
+    customisePostEra_Run3(process)
+    from PhysicsTools.NanoAOD.custom_muon_cff import PrepMuonCustomNanoAOD
+    PrepMuonCustomNanoAOD(process)
+    return process
 def customisePostEra_Run3_express_trackingOnly(process):
     #start with a repeat of 2018
     customisePostEra_Run2_2018_express_trackingOnly(process)
