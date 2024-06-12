@@ -95,6 +95,13 @@ def customisePostEra_Run3_2023(process):
     customisePostEra_Run3(process)
     return process
 
+def customisePostEra_Run3_2023_JME(process):
+    #start with a repeat of Run3
+    customisePostEra_Run3(process)
+    from PhysicsTools.NanoAOD.custom_jme_cff import PrepJMECustomNanoAOD_Data
+    PrepJMECustomNanoAOD_Data(process)
+    return process
+
 def customisePostEra_Run3_express_trackingOnly(process):
     #start with a repeat of 2018
     customisePostEra_Run2_2018_express_trackingOnly(process)
