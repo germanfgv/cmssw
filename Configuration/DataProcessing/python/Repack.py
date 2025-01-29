@@ -58,6 +58,8 @@ def repackProcess(**args):
 
     if len(outputs) > 0:
         process.outputPath = cms.EndPath()
+    
+    outputCommands = args.get('outputCommands', None)
 
     for output in outputs:
 
@@ -69,9 +71,11 @@ def repackProcess(**args):
             "PoolOutputModule",
             compressionAlgorithm=copy.copy(eventContent.compressionAlgorithm),
             compressionLevel=copy.copy(eventContent.compressionLevel),
+            outputCommands=cms.untracked.vstring(""),
             fileName = cms.untracked.string("%s.root" % moduleLabel)
             )
-
+        if outputCommands:
+            outputModule.outputCommands.append(outputCommands)
 
         outputModule.dataset = cms.untracked.PSet(dataTier = cms.untracked.string(dataTier))
 
