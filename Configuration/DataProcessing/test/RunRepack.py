@@ -18,6 +18,7 @@ class RunRepack:
         self.selectEvents = None
         self.inputLFN = None
         self.dataTier = None
+        self.outputCommands = None
 
     def __call__(self):
         if self.inputLFN == None:
@@ -36,9 +37,12 @@ class RunRepack:
         if self.selectEvents != None:
             outputs[0]['selectEvents'] = self.selectEvents.split(',')
             outputs[1]['selectEvents'] = self.selectEvents.split(',')
+        
+        print("out commands: "+self.outputCommands)
+        
 
         try:
-            process = repackProcess(outputs = outputs, dataTier = self.dataTier)
+            process = repackProcess(outputs = outputs, dataTier = self.dataTier, outputCommands = self.outputCommands)
         except Exception as ex:
             msg = "Error creating process for Repack:\n"
             msg += str(ex)
@@ -60,7 +64,7 @@ class RunRepack:
 
 
 if __name__ == '__main__':
-    valid = ["select-events=", "lfn=", "data-tier="]
+    valid = ["select-events=", "lfn=", "data-tier=", "output-commands="]
              
     usage = \
 """
@@ -92,6 +96,8 @@ python RunRepack.py --select-events HLT:path1,HLT:path2 --lfn /store/whatever --
             repackinator.inputLFN = arg
         if opt == "--data-tier" :
             repackinator.dataTier = arg
+        if opt == "--output-commands" :
+            repackinator.outputCommands = arg
 
     repackinator()
 
